@@ -1,0 +1,18 @@
+# Data is not committed: download it from Kaggle (see README)
+data/raw/
+data/processed/
+*.csv
+*.parquet
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+
+# Secrets
+.env
+
+# Power BI temp files
+*.pbix.bak
