@@ -1,0 +1,24 @@
+relationship 9ff71ff6-c58a-48f2-a476-85b53b269d3e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: kpi_customer_cohorts.cohort
+	toColumn: LocalDateTable_04d6d40f-cb6a-4c4e-b00f-52db5e2e7ef7.Date
+
+relationship fdc4f153-2854-41af-b815-821bb2cc23b7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_deliveries.order_purchase_timestamp
+	toColumn: LocalDateTable_97df800d-7e94-4684-96d6-0c8e00c00685.Date
+
+relationship c8c4bd6b-9706-49aa-b9db-d73fb48fa897
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_deliveries.order_delivered_customer_date
+	toColumn: LocalDateTable_36e07a56-6c8c-4385-bb05-3432a9e35549.Date
+
+relationship 940a744f-50c3-4064-9940-f08e0dfda1dd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_deliveries.order_estimated_delivery_date
+	toColumn: LocalDateTable_edcc67b0-b073-4fd2-a306-bde0c27aeac9.Date
+
+relationship d811df4b-37af-99a9-91bb-bbdaef9c0ead
+	fromColumn: fact_deliveries.customer_zip
+	toColumn: dim_geography.zip_code_prefix
+

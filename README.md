@@ -5,6 +5,8 @@ about 100,000 real, anonymised orders from 2016–2018.
 
 **Business question:** where and why do orders arrive late, and which sellers or routes should be fixed first?
 
+![Overview page](docs/img/overview.png)
+
 ```
 Kaggle CSVs → Python (ingestion + data-quality checks) → PostgreSQL (staging → star schema)
 → SQL KPI views → Power BI
@@ -15,7 +17,7 @@ Kaggle CSVs → Python (ingestion + data-quality checks) → PostgreSQL (staging
 - [x] Stage 1: ingestion and data-quality checks into `staging`
 - [x] Stage 2: star schema (`dw`)
 - [x] Stage 2b: KPI views (`dw.kpi_*`)
-- [ ] Stage 3: Power BI report
+- [x] Stage 3: Power BI report (3 pages)
 
 ## Run it
 
@@ -31,6 +33,33 @@ Kaggle CSVs → Python (ingestion + data-quality checks) → PostgreSQL (staging
    python src/ingest.py        # ~3-4 min, mostly the 1M-row geolocation file
    python src/build_model.py   # ~10 s
    ```
+
+## Power BI report
+
+Three pages, all sharing a region filter:
+
+| Page | Question it answers |
+|---|---|
+| Overview | How big is the problem, and does it hurt reviews? |
+| Deliveries | Where are orders late, and which stage of the delivery loses the time? |
+| Sellers & customers | Which sellers to fix first, and do customers come back? |
+
+![Deliveries page](docs/img/deliveries.png)
+![Sellers and customers page](docs/img/sellers_customers.png)
+
+The report is saved as a **Power BI project (PBIP)**: the model (tables, relationships, DAX measures) is stored as TMDL text files and every page and visual as JSON, so changes show up as readable diffs in Git.
+To open it, run the two Python scripts, open `powerbi/olist_delivery_performance.pbip` in Power BI Desktop and press **Refresh**.
+
+Main DAX measures:
+
+```dax
+% Late = DIVIDE([Late Orders], [Delivered Orders])          -- undelivered orders can't be late
+Revenue = CALCULATE(SUM(fact_deliveries[items_value]),
+                    NOT fact_deliveries[order_status] IN {"canceled", "unavailable"})
+Repeat Customer % = VAR c = ADDCOLUMNS(VALUES(fact_deliveries[customer_key]),
+                                       "@orders", CALCULATE(COUNTROWS(fact_deliveries)))
+                    RETURN DIVIDE(COUNTROWS(FILTER(c, [@orders] > 1)), COUNTROWS(c))
+```
 
 ## Data-quality checks
 
@@ -78,7 +107,14 @@ An order is late when it arrives on a calendar day after the estimated date.
 - The Northeast has twice the late rate of the Southeast (12.7% vs 6.1%). The worst routes all start in São Paulo.
 - Most of the delay is in the carrier leg, not at the seller: in the Northeast a late order spends 36 days with the carrier against 14 for an on-time one, while seller handling goes from 2.7 to 4.3 days.
 - 98 of 2,970 sellers (3.3%) account for half of all late orders.
-- Fewer than 1% of customers buy again in the following months.
+- Fewer than 1% of customers buy again in any given month after their first purchase; only 3.1% of customers ever place a second order.
+
+## Recommendations
+
+1. **Renegotiate or replace carriers on the Northeast and North routes.** The carrier leg is where late orders lose time, and São Paulo → Northeast routes are late up to 24% of the time.
+2. **Work with the 98 sellers behind half of the late orders.** A short, named list makes this actionable.
+3. **Plan logistics capacity before demand peaks.** Late rates jumped after Black Friday 2017 and in February–March 2018.
+4. **Treat retention as a separate problem.** Late deliveries cut review scores in half, but even on-time customers rarely return.
 
 ## Project layout
 
@@ -88,6 +124,6 @@ src/ingest.py     reads the CSVs, runs the checks, writes staging and dq tables
 src/build_model.py  runs the SQL files in sql/model and sql/kpis in one transaction
 sql/model/        star schema: dimensions, then facts
 sql/kpis/         KPI views for Power BI (stage 3)
-powerbi/          the .pbix report
+powerbi/          Power BI project (PBIP): TMDL model, report JSON and theme
 data/raw/         CSVs from Kaggle (not committed)
 ```

@@ -1,0 +1,30 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["kpi_customer_cohorts","kpi_monthly","kpi_route_delivery","kpi_seller_delivery","kpi_stage_breakdown","fact_deliveries","dim_geography"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table kpi_customer_cohorts
+ref table DateTableTemplate_b8ddb503-6d07-4d95-bed3-866cddeb27e4
+ref table LocalDateTable_04d6d40f-cb6a-4c4e-b00f-52db5e2e7ef7
+ref table kpi_monthly
+ref table kpi_route_delivery
+ref table kpi_seller_delivery
+ref table kpi_stage_breakdown
+ref table fact_deliveries
+ref table LocalDateTable_97df800d-7e94-4684-96d6-0c8e00c00685
+ref table LocalDateTable_36e07a56-6c8c-4385-bb05-3432a9e35549
+ref table LocalDateTable_edcc67b0-b073-4fd2-a306-bde0c27aeac9
+ref table dim_geography
+
+ref cultureInfo en-US
+

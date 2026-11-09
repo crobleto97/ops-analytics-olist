@@ -1,0 +1,47 @@
+{
+  "name": "Olist Delivery",
+  "dataColors": ["#1F5F7A", "#E07A3F", "#7FA7B8", "#9C9C9C", "#2E8B6E", "#C44536", "#B8C4CA", "#5B4E77"],
+  "background": "#FFFFFF",
+  "foreground": "#1E2A30",
+  "tableAccent": "#1F5F7A",
+  "good": "#2E8B6E",
+  "neutral": "#9C9C9C",
+  "bad": "#C44536",
+  "maximum": "#1F5F7A",
+  "center": "#B8C4CA",
+  "minimum": "#EEF2F4",
+  "textClasses": {
+    "title":   { "fontFace": "Segoe UI Semibold", "fontSize": 12, "color": "#1E2A30" },
+    "header":  { "fontFace": "Segoe UI Semibold", "fontSize": 11, "color": "#1E2A30" },
+    "label":   { "fontFace": "Segoe UI", "fontSize": 10, "color": "#5A6A72" },
+    "callout": { "fontFace": "Segoe UI Semibold", "fontSize": 26, "color": "#1E2A30" }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [{ "show": true, "color": { "solid": { "color": "#FFFFFF" } }, "transparency": 0 }],
+        "border": [{ "show": true, "color": { "solid": { "color": "#E1E7EA" } }, "radius": 6 }],
+        "dropShadow": [{ "show": false }],
+        "padding": [{ "top": 10, "bottom": 10, "left": 12, "right": 12 }]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [{ "color": { "solid": { "color": "#F4F6F7" } }, "transparency": 0 }],
+        "outspace": [{ "color": { "solid": { "color": "#F4F6F7" } } }]
+      }
+    },
+    "card": {
+      "*": {
+        "labels": [{ "fontSize": 26, "color": { "solid": { "color": "#1E2A30" } } }],
+        "categoryLabels": [{ "fontSize": 10, "color": { "solid": { "color": "#5A6A72" } } }]
+      }
+    },
+    "lineClusteredColumnComboChart": {
+      "*": {
+        "valueAxis": [{ "gridlineShow": false }],
+        "lineStyles": [{ "lineStyle": "solid", "strokeWidth": 3 }]
+      }
+    }
+  }
+}

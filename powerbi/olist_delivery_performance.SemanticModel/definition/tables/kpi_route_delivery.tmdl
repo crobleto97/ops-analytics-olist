@@ -1,0 +1,86 @@
+table kpi_route_delivery
+	lineageTag: 775cd69e-4271-47af-8639-ed78d28f3f0e
+
+	column seller_state
+		dataType: string
+		lineageTag: f0696005-50f8-488f-a3c8-e2a3cc3943ce
+		summarizeBy: none
+		sourceColumn: seller_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_state
+		dataType: string
+		lineageTag: 91935bc6-3fe9-4fd7-97d6-0118a9351b8f
+		summarizeBy: none
+		sourceColumn: customer_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_region
+		dataType: string
+		lineageTag: 1836a2e3-334e-4b7f-9d70-ea1a95bb6a67
+		summarizeBy: none
+		sourceColumn: customer_region
+
+		annotation SummarizationSetBy = Automatic
+
+	column orders
+		dataType: int64
+		formatString: 0
+		lineageTag: 7bce2736-26cf-4a4e-90f7-48da6465ab57
+		summarizeBy: sum
+		sourceColumn: orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column late_orders
+		dataType: int64
+		formatString: 0
+		lineageTag: eb5f000e-195a-4396-8cb3-9de31e9075c6
+		summarizeBy: sum
+		sourceColumn: late_orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_late
+		dataType: double
+		formatString: 0.0"%"
+		lineageTag: eb1922e8-301c-4466-8564-4a867eda4cc4
+		summarizeBy: sum
+		sourceColumn: pct_late
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_days_total
+		dataType: double
+		formatString: 0.0
+		lineageTag: 7922cfb0-7d8c-484a-9ad1-fd5e187669fb
+		summarizeBy: sum
+		sourceColumn: avg_days_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_days_promised
+		dataType: double
+		lineageTag: 214bd7eb-9784-4177-bcf3-124aa6408859
+		summarizeBy: sum
+		sourceColumn: avg_days_promised
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition kpi_route_delivery = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "olist"),
+				    dw_kpi_route_delivery = Source{[Schema="dw",Item="kpi_route_delivery"]}[Data]
+				in
+				    dw_kpi_route_delivery
+

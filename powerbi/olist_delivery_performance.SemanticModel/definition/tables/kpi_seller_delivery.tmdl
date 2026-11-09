@@ -1,0 +1,125 @@
+table kpi_seller_delivery
+	lineageTag: 94e45e7e-0a4c-44c4-8328-bb8024dbd956
+
+	measure Sellers = COUNTROWS(kpi_seller_delivery)
+		formatString: #,0
+		lineageTag: 1d0de282-3409-4058-818e-e7127a138b64
+
+	measure 'Sellers Behind Half Of Late Orders' = CALCULATE(COUNTROWS(kpi_seller_delivery), kpi_seller_delivery[cum_pct_of_late_orders] <= 50)
+		formatString: #,0
+		lineageTag: cb36f50b-23bc-48ca-8aff-dae29deb0885
+
+	column seller_key
+		dataType: string
+		lineageTag: 153febc2-58ae-4283-a066-7b3005a298b0
+		summarizeBy: none
+		sourceColumn: seller_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column orders
+		dataType: int64
+		formatString: 0
+		lineageTag: d5d15676-d51d-4087-981b-e3a0cca2da17
+		summarizeBy: sum
+		sourceColumn: orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column late_orders
+		dataType: int64
+		formatString: 0
+		lineageTag: 430a7b74-b6e0-42dc-be65-a8cdc2ff0419
+		summarizeBy: sum
+		sourceColumn: late_orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_late
+		dataType: double
+		formatString: 0.0"%"
+		lineageTag: ac5046ca-f198-49db-9701-37e376ab875c
+		summarizeBy: sum
+		sourceColumn: pct_late
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_days_to_carrier
+		dataType: double
+		formatString: 0.0
+		lineageTag: eb040dcb-3d1e-444b-98e4-2ee32f7f6124
+		summarizeBy: sum
+		sourceColumn: avg_days_to_carrier
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_days_total
+		dataType: double
+		lineageTag: 00c2d490-bd1d-4290-8ca7-0b139e2c0aae
+		summarizeBy: sum
+		sourceColumn: avg_days_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_review
+		dataType: double
+		lineageTag: 3bd7bbbc-c37d-446e-9215-f15b0c1bc4b9
+		summarizeBy: sum
+		sourceColumn: avg_review
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column seller_state
+		dataType: string
+		lineageTag: c06ab965-b0bf-40f6-af25-39a6d2ae90ab
+		summarizeBy: none
+		sourceColumn: seller_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column rank_late_orders
+		dataType: int64
+		formatString: 0
+		lineageTag: 426975ff-565a-4d39-9a8d-1980432a2718
+		summarizeBy: sum
+		sourceColumn: rank_late_orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column cum_pct_of_late_orders
+		dataType: double
+		formatString: 0.0"%"
+		lineageTag: 69ffd75a-9ffd-4ed1-b75b-03987349ad01
+		summarizeBy: sum
+		sourceColumn: cum_pct_of_late_orders
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column seller_position
+		dataType: int64
+		formatString: 0
+		lineageTag: dc646350-c58b-4e5a-b933-d6ee3f93a375
+		summarizeBy: none
+		sourceColumn: seller_position
+
+		annotation SummarizationSetBy = Automatic
+
+	partition kpi_seller_delivery = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "olist"),
+				    dw_kpi_seller_delivery = Source{[Schema="dw",Item="kpi_seller_delivery"]}[Data]
+				in
+				    dw_kpi_seller_delivery
+

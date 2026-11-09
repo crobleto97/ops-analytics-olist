@@ -1,0 +1,89 @@
+table kpi_stage_breakdown
+	lineageTag: 95ce434f-dab2-43c5-b5ed-5cfbfbe3744e
+
+	column region
+		dataType: string
+		lineageTag: 6be78ed0-8646-4897-8a5c-cddc6b3314f5
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column outcome
+		dataType: string
+		lineageTag: 836b5afb-d8f0-454d-a71a-c1396b6ed09b
+		summarizeBy: none
+		sourceColumn: outcome
+
+		annotation SummarizationSetBy = Automatic
+
+	column orders
+		dataType: int64
+		formatString: 0
+		lineageTag: 32e09502-8462-443b-8d8b-558728e37988
+		summarizeBy: sum
+		sourceColumn: orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_days_to_approve
+		dataType: double
+		lineageTag: cb5f1c36-8135-4e0d-ba64-ff19fc2314a2
+		summarizeBy: sum
+		sourceColumn: avg_days_to_approve
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_days_seller_to_carrier
+		dataType: double
+		lineageTag: 1a9318ed-ea90-48da-8def-f78916cf8cf6
+		summarizeBy: sum
+		sourceColumn: avg_days_seller_to_carrier
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_days_carrier_to_customer
+		dataType: double
+		lineageTag: 893187d4-249d-4708-b372-a033aa893cc4
+		summarizeBy: sum
+		sourceColumn: avg_days_carrier_to_customer
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_days_total
+		dataType: double
+		lineageTag: 26f39470-a28b-4ab8-8449-d998b23a48c1
+		summarizeBy: sum
+		sourceColumn: avg_days_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_review
+		dataType: double
+		lineageTag: 296216e6-2bd7-4cf2-aa07-3a88b06918c1
+		summarizeBy: sum
+		sourceColumn: avg_review
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition kpi_stage_breakdown = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "olist"),
+				    dw_kpi_stage_breakdown = Source{[Schema="dw",Item="kpi_stage_breakdown"]}[Data]
+				in
+				    dw_kpi_stage_breakdown
+
+	annotation PBI_ResultType = Table
+

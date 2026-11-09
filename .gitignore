@@ -16,3 +16,8 @@ __pycache__/
 
 # Power BI temp files
 *.pbix.bak
+
+# Power BI project: local cache and user settings
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+*.pbix

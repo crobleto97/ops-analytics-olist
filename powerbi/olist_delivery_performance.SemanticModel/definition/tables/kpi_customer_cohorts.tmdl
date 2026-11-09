@@ -1,0 +1,57 @@
+table kpi_customer_cohorts
+	lineageTag: 9840d58e-f4b8-4899-9bf2-802d39b288e2
+
+	column cohort
+		dataType: dateTime
+		formatString: mmm yyyy
+		lineageTag: 1835231d-68f7-4c39-8e10-3dc9ffce328c
+		summarizeBy: none
+		sourceColumn: cohort
+
+		variation Variation
+			isDefault
+			relationship: 9ff71ff6-c58a-48f2-a476-85b53b269d3e
+			defaultHierarchy: LocalDateTable_04d6d40f-cb6a-4c4e-b00f-52db5e2e7ef7.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column months_since
+		dataType: int64
+		formatString: 0
+		lineageTag: 1045fd09-edc1-4c86-9d54-48a23df54001
+		summarizeBy: sum
+		sourceColumn: months_since
+
+		annotation SummarizationSetBy = Automatic
+
+	column customers
+		dataType: int64
+		formatString: 0
+		lineageTag: b0c3b7d7-feaa-4e9a-a44c-93a589f40e17
+		summarizeBy: sum
+		sourceColumn: customers
+
+		annotation SummarizationSetBy = Automatic
+
+	column retention_pct
+		dataType: double
+		formatString: 0.00"%"
+		lineageTag: 43866b9f-4f34-4819-8bea-6d74ad8c9e45
+		summarizeBy: sum
+		sourceColumn: retention_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition kpi_customer_cohorts = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "olist"),
+				    dw_kpi_customer_cohorts = Source{[Schema="dw",Item="kpi_customer_cohorts"]}[Data]
+				in
+				    dw_kpi_customer_cohorts
+

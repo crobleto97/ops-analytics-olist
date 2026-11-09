@@ -1,0 +1,89 @@
+table kpi_monthly
+	lineageTag: a9424a63-b57e-4cee-b6bd-354aff46cff7
+
+	column year_month
+		dataType: string
+		lineageTag: 00849e2e-bdb0-47b3-9a3b-c68eec415308
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column orders
+		dataType: int64
+		formatString: 0
+		lineageTag: f3c3a4c0-3675-47e5-95cc-9e9e1260bd1f
+		summarizeBy: sum
+		sourceColumn: orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue
+		dataType: double
+		lineageTag: 39d3f255-b57e-4ab5-8ca7-545f6f8b1cb3
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column freight
+		dataType: double
+		lineageTag: 45869767-73d5-437b-9894-f2196b42a3c9
+		summarizeBy: sum
+		sourceColumn: freight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_ticket
+		dataType: double
+		lineageTag: c2188bf4-d3ab-4178-b90f-9e3a68030854
+		summarizeBy: sum
+		sourceColumn: avg_ticket
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column pct_late
+		dataType: double
+		lineageTag: cce45ed3-1d2c-4c37-9a48-e0f13ec26833
+		summarizeBy: sum
+		sourceColumn: pct_late
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_review
+		dataType: double
+		lineageTag: 60ed6dbb-9eb3-4674-8de6-3e5409176497
+		summarizeBy: sum
+		sourceColumn: avg_review
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column orders_mom_pct
+		dataType: double
+		lineageTag: 33f377a8-9e18-4a82-908d-0183c836dd8a
+		summarizeBy: sum
+		sourceColumn: orders_mom_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition kpi_monthly = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "olist"),
+				    dw_kpi_monthly = Source{[Schema="dw",Item="kpi_monthly"]}[Data]
+				in
+				    dw_kpi_monthly
+

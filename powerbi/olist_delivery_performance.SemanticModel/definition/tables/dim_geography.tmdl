@@ -1,0 +1,66 @@
+table dim_geography
+	lineageTag: d378d8f5-6a45-4e59-9ee3-4f0945e207a8
+
+	column zip_code_prefix
+		dataType: string
+		lineageTag: 9f324832-420e-41cc-8597-92cab4ed4c2d
+		summarizeBy: none
+		sourceColumn: zip_code_prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: e65a67e8-8164-473c-a75b-2b6129df9230
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 576fe7d3-a292-45f7-9e39-b90ab040603a
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: b1c9d3dd-ff74-41ff-be3d-4c690ae09a85
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column lat
+		dataType: double
+		lineageTag: 644d8bd8-cbd2-452a-b27f-04888b0b53a9
+		summarizeBy: none
+		sourceColumn: lat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lng
+		dataType: double
+		lineageTag: a6dd0430-a8df-4e6f-a95e-135e640e8003
+		summarizeBy: none
+		sourceColumn: lng
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_geography = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "olist"),
+				    dw_dim_geography = Source{[Schema="dw",Item="dim_geography"]}[Data]
+				in
+				    dw_dim_geography
+
+	annotation PBI_ResultType = Table
+

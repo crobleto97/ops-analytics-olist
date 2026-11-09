@@ -1,0 +1,260 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "fact_deliveries.delivery_outcome": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_deliveries",
+			          "ConceptualProperty": "delivery_outcome"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Delivery": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_deliveries.avg_review": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_deliveries",
+			          "ConceptualProperty": "Avg Review"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Avg review": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_deliveries.avg_days_to_approve": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_deliveries",
+			          "ConceptualProperty": "Avg Days To Approve"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Payment approval": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_deliveries.avg_days_seller_to_carrier": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_deliveries",
+			          "ConceptualProperty": "Avg Days Seller To Carrier"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Seller to carrier": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_deliveries.avg_days_carrier_to_customer": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_deliveries",
+			          "ConceptualProperty": "Avg Days Carrier To Customer"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Carrier to customer": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_deliveries.late": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_deliveries",
+			          "ConceptualProperty": "% Late"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "% late": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_route_delivery.seller_state": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "kpi_route_delivery",
+			          "ConceptualProperty": "seller_state"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "From": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_route_delivery.customer_state": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "kpi_route_delivery",
+			          "ConceptualProperty": "customer_state"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "To": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_geography.state": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_geography",
+			          "ConceptualProperty": "state"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Customer state": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_seller_delivery.rank_late_orders": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "kpi_seller_delivery",
+			          "ConceptualProperty": "rank_late_orders"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "kpi_seller_delivery.seller_state": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "kpi_seller_delivery",
+			          "ConceptualProperty": "seller_state"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "State": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_customer_cohorts.cohort": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "kpi_customer_cohorts",
+			          "ConceptualProperty": "cohort"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "kpi_customer_cohorts.months_since": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "kpi_customer_cohorts",
+			          "ConceptualProperty": "months_since"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Months since first purchase": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+
