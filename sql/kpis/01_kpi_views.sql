@@ -43,6 +43,8 @@ SELECT
     p.*,
     s.state                                                    AS seller_state,
     rank() OVER (ORDER BY late_orders DESC)                    AS rank_late_orders,
+    -- unique position for charts: ties in late_orders broken by seller id
+    row_number() OVER (ORDER BY late_orders DESC, seller_key)  AS seller_position,
     round(100.0 * sum(late_orders) OVER (ORDER BY late_orders DESC, seller_key)
           / sum(late_orders) OVER (), 1)                       AS cum_pct_of_late_orders
 FROM per_seller p
